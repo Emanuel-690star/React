@@ -3,6 +3,8 @@ import Encabezado from './Encabezado.jsx';
 import ContenedorTarjetas from './ContenedorTarjetas';
 import Footer from './Footer';
 import BannerSuave from './BannerSuave';
+import Productos from "./Productos";
+
 
 function App(){
 
@@ -24,7 +26,8 @@ function App(){
 
       {seccion === "acerca" && <h1>Acerca de nosotros (vacío por ahora)</h1>}
 
-      {seccion === "productos" && <h1>Productos (vacío)</h1>}
+      {seccion === "productos" && <Productos />}
+
 
       {seccion === "contacto" && <h1>Contacto (vacío)</h1>}
 
