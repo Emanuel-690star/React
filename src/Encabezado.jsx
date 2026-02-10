@@ -4,11 +4,12 @@ import instagram from './assets/instagram.png';
 import gmail from './assets/gmail.png';
 import tiktok from './assets/tik-tok.png';
 import './Encabezado.css';
-function Encabezado(){
+
+function Encabezado({ onCambiar }){
     return (
         <div className="Encabezado">
             <Logo />
-            <Menu />
+            <Menu onCambiar={onCambiar} />
             <Redes />
         </div>
     );
@@ -22,31 +23,32 @@ function Logo(){
     );
 }
 
-
-function Menu(){
+function Menu({ onCambiar }){
     return (
         <div className="MenuDiv">
             <ul>
-                <li><a href='#'>Inicio</a></li>
-                <li><a href='#'>Acerca de</a></li>
-                <li><a href='#'>Productos</a></li>
-                <li><a href='#'>Contacto</a></li>
-                <li><a href='#'>Sucursales</a></li>
+                <li><button onClick={() => onCambiar("inicio")}>Inicio</button></li>
+                <li><button onClick={() => onCambiar("acerca")}>Acerca de</button></li>
+                <li><button onClick={() => onCambiar("productos")}>Productos</button></li>
+                <li><button onClick={() => onCambiar("contacto")}>Contacto</button></li>
+                <li><button onClick={() => onCambiar("sucursales")}>Sucursales</button></li>
             </ul>
         </div>    
     );
 }
 
+
 function Redes(){
     return (
         <div className="RedesDiv">
             <ul>
-                <li className="redes"> <a href='#'> <img src={facebook} alt="Facebook" /></a></li> 
-                <li className="redes"> <a href='#'> <img src={instagram} alt="Instagram" /></a></li>
-                <li className="redes"> <a href='#'> <img src={gmail} alt="Gmail" /></a></li>
-                <li className="redes"> <a href='#'> <img src={tiktok} alt="TikTok" /></a></li>
+                <li className="redes"><a href='#'><img src={facebook} alt="Facebook" /></a></li> 
+                <li className="redes"><a href='#'><img src={instagram} alt="Instagram" /></a></li>
+                <li className="redes"><a href='#'><img src={gmail} alt="Gmail" /></a></li>
+                <li className="redes"><a href='#'><img src={tiktok} alt="TikTok" /></a></li>
             </ul>
         </div>
     );
 }
-export default Encabezado
+
+export default Encabezado;
