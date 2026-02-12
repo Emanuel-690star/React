@@ -4,6 +4,8 @@ import ContenedorTarjetas from './ContenedorTarjetas';
 import Footer from './Footer';
 import BannerSuave from './BannerSuave';
 import Productos from "./Productos";
+import Contactos from "./Contactos";
+
 
 
 function App(){
@@ -29,7 +31,8 @@ function App(){
       {seccion === "productos" && <Productos />}
 
 
-      {seccion === "contacto" && <h1>Contacto (vacío)</h1>}
+      {seccion === "contacto" && <Contactos />}
+
 
       {seccion === "sucursales" && <h1>Sucursales (vacío)</h1>}
 
