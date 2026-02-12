@@ -1,0 +1,56 @@
+.acerca-container{
+  color: white;
+}
+
+/* HERO */
+.acerca-hero{
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+
+.acerca-hero img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.6);
+}
+
+.acerca-overlay{
+  position: absolute;
+  inset: 0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.acerca-overlay h1{
+  font-size: 42px;
+  letter-spacing: 2px;
+}
+
+/* TEXTO */
+.acerca-texto{
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+  line-height: 1.6;
+  text-align:center;
+}
+
+/* CARDS */
+.acerca-grid{
+  display:flex;
+  gap: 30px;
+  justify-content:center;
+  padding-bottom: 40px;
+}
+
+.acerca-card{
+  background:#0b1430;
+  padding: 25px;
+  border-radius: 16px;
+  width: 300px;
+
+  box-shadow: 0 0 18px rgba(60,100,255,.4);
+}

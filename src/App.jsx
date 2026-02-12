@@ -5,6 +5,10 @@ import Footer from './Footer';
 import BannerSuave from './BannerSuave';
 import Productos from "./Productos";
 import Contactos from "./Contactos";
+import Sucursales from "./Sucursales";
+import Acerca from "./Acerca";
+
+
 
 
 
@@ -26,7 +30,8 @@ function App(){
         </>
       )}
 
-      {seccion === "acerca" && <h1>Acerca de nosotros (vacío por ahora)</h1>}
+      {seccion === "acerca" && <Acerca />}
+
 
       {seccion === "productos" && <Productos />}
 
@@ -34,7 +39,8 @@ function App(){
       {seccion === "contacto" && <Contactos />}
 
 
-      {seccion === "sucursales" && <h1>Sucursales (vacío)</h1>}
+      {seccion === "sucursales" && <Sucursales />}
+
 
     </>
   );

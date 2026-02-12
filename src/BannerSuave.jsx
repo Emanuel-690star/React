@@ -1,18 +1,25 @@
-import './BannerSuave.css';
+import "./BannerSuave.css";
+import Mapa from "./Mapa";
 
 function BannerSuave(){
-    return(
-        <section className="bannerSuave">
-            <div className="overlay">
-                <div className="contenido">
-                    <h2>Promociones especiales</h2>
-                    <p>
-                        Descubre contenido exclusivo y novedades en nuestra app.
-                    </p>
-                </div>
-            </div>
-        </section>
-    );
+  return(
+    <div className="banner">
+
+      <h2 className="banner-titulo">
+        Encuentra nuestra sede Champions ⚽
+      </h2>
+
+      {/* MAPA */}
+      <div className="mapa-wrapper">
+        <Mapa
+          lat={19.4326}
+          lng={-99.1332}
+          nombre_sucursal="Sede Central"
+        />
+      </div>
+
+    </div>
+  );
 }
 
 export default BannerSuave;
