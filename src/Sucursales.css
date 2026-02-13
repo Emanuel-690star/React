@@ -1,75 +1,60 @@
 .suc-container{
   padding: 40px;
-  background: #050b1f;
+  background: radial-gradient(circle at top,#0a1435,#020617);
   min-height: 100vh;
 }
 
 .suc-titulo{
-  text-align: center;
-  color: white;
-  margin-bottom: 40px;
+  text-align:center;
+  color:white;
   font-size: 32px;
+  margin-bottom: 35px;
 }
 
 /* GRID */
 .suc-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
-  gap: 25px;
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+  gap: 28px;
 }
 
 /* CARD */
 .suc-card{
-  background: #0b1430;
-  border-radius: 18px;
-  overflow: hidden;
-
-  transition: .3s;
-  cursor: pointer;
+  background:#09122b;
+  border-radius:18px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.25s;
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
 }
 
 .suc-card:hover{
-  transform: translateY(-8px);
+  transform:translateY(-6px) scale(1.02);
   box-shadow:
-    0 0 18px rgba(80,130,255,.7),
-    0 10px 30px rgba(0,0,0,.6);
+    0 0 20px rgba(70,120,255,.5),
+    0 12px 30px rgba(0,0,0,.7);
 }
 
 /* IMG */
 .suc-card img{
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  width:100%;
+  height:190px;
+  object-fit:cover;
 }
 
 /* INFO */
 .suc-info{
-  padding: 18px;
-  color: white;
+  padding:18px;
+  color:white;
 }
 
 .suc-info h2{
-  margin-bottom: 6px;
+  margin-bottom:8px;
 }
 
-.suc-info p{
-  opacity: .7;
-  margin-bottom: 12px;
-}
-
-/* BOTON */
-.suc-info a{
-  display: inline-block;
-  padding: 8px 14px;
-  background: #1e3cff;
-  border-radius: 8px;
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-
-  transition: .2s;
-}
-
-.suc-info a:hover{
-  background: #3f5cff;
+/* MINI MAPA */
+.mini-mapa{
+  width:100%;
+  height:160px;
+  border:0;
 }

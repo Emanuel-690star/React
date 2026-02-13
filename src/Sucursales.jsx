@@ -1,4 +1,5 @@
 import "./Sucursales.css";
+import Mapa from "./Mapa";
 
 import santiago from "./assets/santiago.jpg";
 import cap from "./assets/cap.jpg";
@@ -11,7 +12,9 @@ const lista = [
     capacidad: "81,044 espectadores",
     ano: "1947",
     img: santiago,
-    mapa: "https://maps.google.com/?q=Santiago+Bernabeu"
+    mapa: "https://maps.google.com/?q=Santiago+Bernabeu",
+    lat: 40.4531,
+    lng: -3.6883
   },
   {
     nombre: "CAP Stadium",
@@ -19,7 +22,9 @@ const lista = [
     capacidad: "50,000 espectadores",
     ano: "2003",
     img: cap,
-    mapa: "https://maps.google.com/"
+    mapa: "https://maps.google.com/?q=Portugal",
+    lat: 39.3999,
+    lng: -8.2245
   },
   {
     nombre: "Anfield",
@@ -27,11 +32,18 @@ const lista = [
     capacidad: "53,394 espectadores",
     ano: "1884",
     img: anfild,
-    mapa: "https://maps.google.com/?q=Anfield"
+    mapa: "https://maps.google.com/?q=Anfield",
+    lat: 53.4308,
+    lng: -2.9608
   }
 ];
 
 function Sucursales(){
+
+  const abrirMapa = (url)=>{
+    window.open(url,"_blank");
+  };
+
   return (
     <div className="suc-container">
 
@@ -41,22 +53,29 @@ function Sucursales(){
 
       <div className="suc-grid">
 
-        {lista.map((s, i) => (
-          <div className="suc-card" key={i}>
+        {lista.map((s,i)=>(
+          <div
+            className="suc-card"
+            key={i}
+            onClick={()=>abrirMapa(s.mapa)}
+          >
 
             <img src={s.img} alt={s.nombre}/>
 
             <div className="suc-info">
               <h2>{s.nombre}</h2>
-
               <p>📍 {s.ciudad}</p>
-              <p>👥 Capacidad: {s.capacidad}</p>
-              <p>🏗 Inauguración: {s.ano}</p>
+              <p>👥 {s.capacidad}</p>
+              <p>🏗 {s.ano}</p>
+            </div>
 
-              <a href={s.mapa} target="_blank">
-                Ver ubicación
-              </a>
-
+            {/* 🔥 USANDO TU COMPONENTE MAPA */}
+            <div className="mini-mapa">
+              <Mapa
+                lat={s.lat}
+                lng={s.lng}
+                nombre_sucursal={s.nombre}
+              />
             </div>
 
           </div>
@@ -68,3 +87,4 @@ function Sucursales(){
 }
 
 export default Sucursales;
+
