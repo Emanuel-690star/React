@@ -12,6 +12,7 @@ import Acerca from "./Acerca";
 
 
 
+
 function App(){
 
   const [seccion, setSeccion] = useState("inicio");

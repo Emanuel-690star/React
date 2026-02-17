@@ -4,6 +4,7 @@ import instagram from './assets/instagram.png';
 import gmail from './assets/gmail.png';
 import tiktok from './assets/tik-tok.png';
 import './Encabezado.css';
+import Clima from './Clima';
 
 function Encabezado({ onCambiar }){
     return (
@@ -33,6 +34,7 @@ function Menu({ onCambiar }){
                 <li><button onClick={() => onCambiar("contacto")}>Contacto</button></li>
                 <li><button onClick={() => onCambiar("sucursales")}>Sucursales</button></li>
             </ul>
+            <Clima />
         </div>    
     );
 }
