@@ -1,50 +1,90 @@
-/* CONTENEDOR PINTEREST */
-.pinterest-container {
-  column-count: 5;      /* llena más la pantalla */
-  column-gap: 12px;
-  padding: 18px;
+/* CONTENEDOR GENERAL */
+.ProductosDiv {
+  padding: 30px 40px;
+  background: radial-gradient(circle at top, #0a1a3a, #020617);
+  min-height: 100vh;
+}
+
+/* TITULO */
+.ProductosDiv h1 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* GRID TIPO PINTEREST (pero ordenado) */
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+/* CARD */
+.producto-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #0b1430;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* IMAGEN COMPLETA (como te gusta) */
+.producto-card img {
+  width: 100%;
+  height: 220px;          /* tamaño equilibrado */
+  object-fit: cover;      /* se ve pro */
+  display: block;
+}
+
+/* INFO (overlay elegante) */
+.producto-card h3 {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+  font-size: 0.9rem;
+  color: white;
+  background: linear-gradient(
+    to top,
+    rgba(2, 6, 23, 0.95),
+    rgba(2, 6, 23, 0.4),
+    transparent
+  );
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+/* EFECTO HOVER ESTILO CHAMPIONS */
+.producto-card:hover {
+  transform: scale(1.04);
+  box-shadow:
+    0 0 15px rgba(0, 119, 255, 0.7),
+    0 10px 30px rgba(0, 0, 0, 0.7);
 }
 
 /* RESPONSIVE */
-@media (max-width: 1200px){
-  .pinterest-container { column-count: 4; }
+@media (max-width: 900px) {
+  .productos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .producto-card img {
+    height: 200px;
+  }
 }
 
-@media (max-width: 900px){
-  .pinterest-container { column-count: 3; }
-}
+@media (max-width: 500px) {
+  .ProductosDiv {
+    padding: 20px;
+  }
 
-@media (max-width: 600px){
-  .pinterest-container { column-count: 2; }
-}
-
-
-/* CARD */
-.pin-card {
-  margin-bottom: 12px;
-  break-inside: avoid;
-
-  border-radius: 14px;
-  overflow: hidden;
-
-  cursor: pointer;
-
-  transition: transform .2s ease,
-              box-shadow .2s ease;
-}
-
-
-/* IMAGEN — LA CLAVE */
-.pin-card img {
-  width: 100%;
-  display: block;
-  border-radius: 14px;
-}
-
-
-/* HOVER estilo pro */
-.pin-card:hover {
-  transform: scale(1.02);
-  box-shadow:
-    0 6px 18px rgba(0,0,0,.45);
+  .producto-card img {
+    height: 180px;
+  }
 }

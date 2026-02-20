@@ -1,37 +1,55 @@
 import "./Productos.css";
+import { useEffect, useState } from "react";
+import api from "./services/Api";
 
-import van from "./assets/van.jpg";
-import alison from "./assets/alison.jpg";
-import Ryan from "./assets/Ryan.jpg";
-import dembele from "./assets/dembele.jpg";
-import florianw from "./assets/florianw.jpg";
-import fodem from "./assets/fodem.jpg";
-import ekitike from "./assets/ekitike.jpg";
-import dominic from "./assets/dominic.jpg";
-import desire from "./assets/desire.jpg";
-import cole from "./assets/cole.jpg";
-import cherki from "./assets/cherki.jpg";
-import isak from "./assets/isak.jpg";
-import jeremy from "./assets/jeremy.jpg";
-import trent from "./assets/trent.jpg";
-import rice from "./assets/rice.jpg";
+function Productos() {
 
+  const [productos, setProductos] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
-const imgs = [
-  van, alison, Ryan, dembele, florianw,
-  fodem, ekitike, dominic, desire,
-  cole, cherki, isak, jeremy, trent, rice, 
-];
+  useEffect(() => {
 
-export default function Productos() {
+    const obtenerProductos = async () => {
+      try {
+        const response = await api.get("/products"); 
+        console.log("DATA API:", response.data); // para debug
+
+        // Aseguramos que sea un array
+        if (Array.isArray(response.data)) {
+          setProductos(response.data);
+        } else {
+          setProductos([]); // evita el error .map
+        }
+
+      } catch (error) {
+        console.error("Error al obtener productos:", error);
+        setProductos([]);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    obtenerProductos();
+
+  }, []);
+
+  if (cargando) return <p>Cargando productos...</p>;
+
   return (
-    <div className="pinterest-container">
-      {imgs.map((img, i) => (
-        <div className={`pin-card h${(i % 5) + 1}`} key={i}>
-          <img src={img} alt="" />
-          <div className="pin-overlay"></div>
-        </div>
-      ))}
+    <div className="ProductosDiv">
+      <h1>CATÁLOGO PRODUCTOS</h1>
+
+      <div className="productos-grid">
+        {productos.map((producto) => (
+          <div className="producto-card" key={producto.id}>
+            <img src={producto.image} alt={producto.title} />
+            <h3>{producto.title}</h3>
+          </div>
+        ))}
+      </div>
+
     </div>
   );
 }
+
+export default Productos;
