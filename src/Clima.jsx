@@ -1,37 +1,35 @@
 import { useEffect, useState } from "react";
+import "./Clima.css";
 
-function Clima() {
+function Clima({ lat, lng }) {
   const [clima, setClima] = useState(null);
 
   const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
-  const lat = 20.238361206951552;
-  const lng = -97.95691509825079;
 
   useEffect(() => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric&lang=es`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
+    if (!lat || !lng) return;
+
+    const obtenerClima = async () => {
+      try {
+        const res = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${API_KEY}&units=metric&lang=es`
+        );
+        const data = await res.json();
         setClima(data);
-      })
-      .catch((error) => console.error("Error:", error));
-  }, []);
+      } catch (error) {
+        console.error("Error clima:", error);
+      }
+    };
+
+    obtenerClima();
+  }, [lat, lng, API_KEY]);
+
+  if (!clima) return <p className="clima-loading">Cargando clima...</p>;
 
   return (
-    <div className="divClima">
-      {clima ? (
-        <>
-          <p>
-            {clima.name} | Temp: {clima.main.temp} °C | Hum:{" "}
-            {clima.main.humidity}%
-          </p>
-          <p>Descripción: {clima.weather[0].description}</p>
-        </>
-      ) : (
-        <p>Cargando clima...</p>
-      )}
+    <div className="clima-card">
+      <p>🌡 {Math.round(clima.main.temp)}°C</p>
+      <p>☁ {clima.weather[0].description}</p>
     </div>
   );
 }

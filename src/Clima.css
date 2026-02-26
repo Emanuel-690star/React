@@ -1,0 +1,72 @@
+/* CONTENEDOR DEL CLIMA (widget dentro de la card) */
+.clima-card{
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(8,15,45,0.95),
+    rgba(15,30,80,0.9)
+  );
+
+  border: 1px solid rgba(90,120,255,0.35);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  color: #e6ecff;
+  font-family: "Segoe UI", sans-serif;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.35),
+    0 0 12px rgba(70,120,255,0.15);
+
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* HOVER suave (no exagerado para que no rompa el diseño) */
+.clima-card:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.5),
+    0 0 18px rgba(90,140,255,0.35);
+}
+
+/* TEXTO PRINCIPAL (temperatura) */
+.clima-card p:first-child{
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* DESCRIPCIÓN DEL CLIMA */
+.clima-card p:last-child{
+  font-size: 13px;
+  margin: 4px 0 0 0;
+  color: #a9b7ff;
+  text-transform: capitalize;
+}
+
+/* ESTADO DE CARGA */
+.clima-loading{
+  margin-top: 10px;
+  font-size: 13px;
+  color: #8fa2ff;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* RESPONSIVE (para que no rompa en laptop pequeña) */
+@media (max-width: 768px){
+  .clima-card{
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .clima-card p:first-child{
+    font-size: 14px;
+  }
+}

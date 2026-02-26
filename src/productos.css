@@ -1,90 +1,86 @@
-/* CONTENEDOR GENERAL */
 .ProductosDiv {
-  padding: 30px 40px;
-  background: radial-gradient(circle at top, #0a1a3a, #020617);
+  padding: 30px;
+  background: linear-gradient(180deg, #020617, #0b1430);
   min-height: 100vh;
 }
 
-/* TITULO */
-.ProductosDiv h1 {
+.titulo-tienda {
   text-align: center;
   color: #ffffff;
-  font-size: 2.2rem;
+  font-size: 32px;
   margin-bottom: 30px;
   letter-spacing: 2px;
-  text-transform: uppercase;
 }
 
-/* GRID TIPO PINTEREST (pero ordenado) */
+/* GRID */
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
-  width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+  justify-content: center;
 }
 
 /* CARD */
 .producto-card {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
   background: #0b1430;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-/* IMAGEN COMPLETA (como te gusta) */
+.producto-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 0 25px rgba(70,120,255,0.6);
+}
+
+/* IMAGEN */
 .producto-card img {
   width: 100%;
-  height: 220px;          /* tamaño equilibrado */
-  object-fit: cover;      /* se ve pro */
-  display: block;
+  height: 240px;
+  object-fit: contain;
+  background: #020617;
+  padding: 15px;
 }
 
-/* INFO (overlay elegante) */
-.producto-card h3 {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  margin: 0;
-  padding: 10px;
-  font-size: 0.9rem;
-  color: white;
-  background: linear-gradient(
-    to top,
-    rgba(2, 6, 23, 0.95),
-    rgba(2, 6, 23, 0.4),
-    transparent
-  );
+/* INFO */
+.producto-info {
+  padding: 15px;
   text-align: center;
-  backdrop-filter: blur(4px);
 }
 
-/* EFECTO HOVER ESTILO CHAMPIONS */
-.producto-card:hover {
-  transform: scale(1.04);
-  box-shadow:
-    0 0 15px rgba(0, 119, 255, 0.7),
-    0 10px 30px rgba(0, 0, 0, 0.7);
+.producto-info h3 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .productos-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-
-  .producto-card img {
-    height: 200px;
-  }
+.precio {
+  color: #4f9cff;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
 
-@media (max-width: 500px) {
-  .ProductosDiv {
-    padding: 20px;
-  }
+/* BOTÓN CHAMPIONS */
+.btn-comprar {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
 
-  .producto-card img {
-    height: 180px;
-  }
+.btn-comprar:hover {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  transform: scale(1.05);
+}
+
+.loading {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  margin-top: 50px;
 }

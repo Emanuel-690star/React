@@ -1,5 +1,5 @@
 import "./Sucursales.css";
-import Mapa from "./Mapa";
+import Clima from "./Clima"; // 👈 IMPORTANTE
 
 import santiago from "./assets/santiago.jpg";
 import cap from "./assets/cap.jpg";
@@ -12,9 +12,9 @@ const lista = [
     capacidad: "81,044 espectadores",
     ano: "1947",
     img: santiago,
-    mapa: "https://maps.google.com/?q=Santiago+Bernabeu",
     lat: 40.4531,
-    lng: -3.6883
+    lng: -3.6883,
+    mapa: "https://maps.google.com/?q=Santiago+Bernabeu"
   },
   {
     nombre: "CAP Stadium",
@@ -22,9 +22,9 @@ const lista = [
     capacidad: "50,000 espectadores",
     ano: "2003",
     img: cap,
-    mapa: "https://maps.google.com/?q=Portugal",
-    lat: 39.3999,
-    lng: -8.2245
+    lat: 38.7223,
+    lng: -9.1393,
+    mapa: "https://maps.google.com/?q=Portugal"
   },
   {
     nombre: "Anfield",
@@ -32,50 +32,40 @@ const lista = [
     capacidad: "53,394 espectadores",
     ano: "1884",
     img: anfild,
-    mapa: "https://maps.google.com/?q=Anfield",
     lat: 53.4308,
-    lng: -2.9608
+    lng: -2.9608,
+    mapa: "https://maps.google.com/?q=Anfield"
   }
 ];
 
 function Sucursales(){
-
-  const abrirMapa = (url)=>{
-    window.open(url,"_blank");
-  };
-
   return (
     <div className="suc-container">
 
       <h1 className="suc-titulo">
-        Sedes Champions League
+        Sedes Champions League 🏆
       </h1>
 
       <div className="suc-grid">
 
-        {lista.map((s,i)=>(
-          <div
-            className="suc-card"
-            key={i}
-            onClick={()=>abrirMapa(s.mapa)}
-          >
+        {lista.map((s, i) => (
+          <div className="suc-card" key={i}>
 
-            <img src={s.img} alt={s.nombre}/>
+            <img src={s.img} alt={s.nombre} className="suc-img"/>
 
             <div className="suc-info">
               <h2>{s.nombre}</h2>
+
               <p>📍 {s.ciudad}</p>
               <p>👥 {s.capacidad}</p>
               <p>🏗 {s.ano}</p>
-            </div>
 
-            {/* 🔥 USANDO TU COMPONENTE MAPA */}
-            <div className="mini-mapa">
-              <Mapa
-                lat={s.lat}
-                lng={s.lng}
-                nombre_sucursal={s.nombre}
-              />
+              {/* 🔥 CLIMA DENTRO DE LA CARD */}
+              <Clima lat={s.lat} lng={s.lng} />
+
+              <a href={s.mapa} target="_blank" rel="noreferrer">
+                Ver ubicación 📍
+              </a>
             </div>
 
           </div>
@@ -87,4 +77,3 @@ function Sucursales(){
 }
 
 export default Sucursales;
-

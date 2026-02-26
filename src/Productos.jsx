@@ -11,14 +11,13 @@ function Productos() {
 
     const obtenerProductos = async () => {
       try {
-        const response = await api.get("/products"); 
-        console.log("DATA API:", response.data); // para debug
+        // 🔥 FILTRAMOS SOLO ROPA (más tipo jerseys)
+        const response = await api.get("/products/category/men's clothing");
 
-        // Aseguramos que sea un array
         if (Array.isArray(response.data)) {
           setProductos(response.data);
         } else {
-          setProductos([]); // evita el error .map
+          setProductos([]);
         }
 
       } catch (error) {
@@ -33,17 +32,26 @@ function Productos() {
 
   }, []);
 
-  if (cargando) return <p>Cargando productos...</p>;
+  if (cargando) return <p className="loading">Cargando tienda Champions...</p>;
 
   return (
     <div className="ProductosDiv">
-      <h1>CATÁLOGO PRODUCTOS</h1>
+      <h1 className="titulo-tienda">TIENDA CHAMPIONS STORE ⚽</h1>
 
       <div className="productos-grid">
         {productos.map((producto) => (
           <div className="producto-card" key={producto.id}>
             <img src={producto.image} alt={producto.title} />
-            <h3>{producto.title}</h3>
+
+            <div className="producto-info">
+              {/* 🔥 Cambiamos el estilo visual a deportivo */}
+              <h3>Jersey Elite Edition</h3>
+              <p className="precio">$ {producto.price} MXN</p>
+              <button className="btn-comprar">
+                Añadir al carrito 🛒
+              </button>
+            </div>
+
           </div>
         ))}
       </div>

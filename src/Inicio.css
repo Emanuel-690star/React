@@ -1,0 +1,66 @@
+.inicio-container{
+  min-height: 100vh;
+  background: linear-gradient(180deg, #020617, #0b1430);
+  color: white;
+  text-align: center;
+}
+
+/* HERO */
+.inicio-hero{
+  padding: 60px 20px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.inicio-titulo{
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #e6ecff;
+}
+
+.inicio-descripcion{
+  font-size: 1.2rem;
+  color: #b9c6ff;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* BOTONES */
+.inicio-botones{
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.inicio-botones button{
+  background: #1a2a6c;
+  border: 1px solid #4c6fff;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+.inicio-botones button:hover{
+  background: #4c6fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(76,111,255,.4);
+}
+
+/* SECCIÓN DESTACADA */
+.inicio-destacado{
+  padding: 40px 20px 80px;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #cfd8ff;
+}
+
+.inicio-destacado h2{
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #ffffff;
+}

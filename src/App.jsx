@@ -1,17 +1,11 @@
 import { useState } from "react";
 import Encabezado from './Encabezado.jsx';
-import ContenedorTarjetas from './ContenedorTarjetas';
-import Footer from './Footer';
-import BannerSuave from './BannerSuave';
+import Inicio from './Inicio'; 
 import Productos from "./Productos";
 import Contactos from "./Contactos";
 import Sucursales from "./Sucursales";
 import Acerca from "./Acerca";
-
-
-
-
-
+import Jugadores from "./Jugadores";
 
 function App(){
 
@@ -23,25 +17,17 @@ function App(){
 
       {/* --------- CONTENIDO DINÁMICO --------- */}
 
-      {seccion === "inicio" && (
-        <>
-          <ContenedorTarjetas />
-          <BannerSuave />
-          <Footer />
-        </>
-      )}
+      {seccion === "inicio" && <Inicio />}  
 
       {seccion === "acerca" && <Acerca />}
 
-
       {seccion === "productos" && <Productos />}
-
 
       {seccion === "contacto" && <Contactos />}
 
-
       {seccion === "sucursales" && <Sucursales />}
 
+      {seccion === "Jugadores" && <Jugadores />}
 
     </>
   );
