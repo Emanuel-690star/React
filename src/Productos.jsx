@@ -1,6 +1,7 @@
 import "./Productos.css";
 import { useEffect, useState } from "react";
 import api from "./services/Api";
+import RegistrarProductos from "./RegistrarProductos";
 
 function Productos() {
 
@@ -36,6 +37,7 @@ function Productos() {
 
   return (
     <div className="ProductosDiv">
+      <RegistrarProductos />
       <h1 className="titulo-tienda">TIENDA CHAMPIONS STORE ⚽</h1>
 
       <div className="productos-grid">

@@ -1,0 +1,89 @@
+.registro-productos {
+  --bg-general: #f4f4f4;
+  --panel-bg: #ffffff;
+  --text-main: #1f1f1f;
+  --text-soft: #555555;
+  --border-soft: #dddddd;
+  --accent-green: #1f3d2b;
+  --accent-green-hover: #2e5c43;
+
+  width: 100%;
+  max-width: 560px;
+  margin: 50px auto;
+  padding: 25px;
+  background: var(--panel-bg);
+  border-radius: 16px;
+  box-shadow: 
+  0 0 40px rgba(105, 247, 164, 0.15),
+  0 12px 30px rgba(0, 0, 0, 0.195);
+  font-family: 'Poppins', sans-serif;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.registro-productos__titulo {
+  margin: 0 0 25px;
+  color: var(--text-main);
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 22px;
+}
+
+/* FORMULARIO */
+.registro-productos__form {
+  display: grid;
+  gap: 14px;
+}
+
+.registro-productos__form label {
+  font-size: 14px;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+
+.registro-productos__form input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  background-color: #fafafa;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.registro-productos__form input:focus {
+  outline: none;
+  border: 1px solid var(--accent-green);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(31, 61, 43, 0.08);
+  transform: translateY(-1px);
+}
+
+/* BOTÓN */
+.registro-productos__form button {
+  margin-top: 10px;
+  padding: 13px;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--accent-green);
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.registro-productos:hover {
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.08),
+    0 0 55px rgba(31, 61, 43, 0.22);
+  transform: translateY(-3px);
+}
+
+.registro-productos__form button:hover {
+  background-color: var(--accent-green-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(48, 96, 67, 0.15);
+}
+
+.registro-productos__form button:active {
+  transform: translateY(0);
+}
