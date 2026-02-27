@@ -34,6 +34,8 @@ function Menu({ onCambiar }){
                 <li><button onClick={() => onCambiar("contacto")}>Contacto</button></li>
                 <li><button onClick={() => onCambiar("sucursales")}>Sucursales</button></li>
                 <li><button onClick={() => onCambiar("Jugadores")}>Jugadores</button></li>
+                <li><button onClick={() => onCambiar("carrito")}>Carrito</button></li>
+                <li><button onClick={() => onCambiar("Usuarios")}>Usuarios</button></li>
             </ul>
             <Clima />
         </div>    
