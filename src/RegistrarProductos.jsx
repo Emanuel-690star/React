@@ -1,6 +1,6 @@
 import "./RegistrarProductos.css";
 
-function RegistrarProductos() {
+function RegistrarProductos({}) {
     return (
         <div className="registro-productos">
         <h3 className="registro-productos__titulo">Registrar Productos</h3>

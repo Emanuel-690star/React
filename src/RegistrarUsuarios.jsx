@@ -1,90 +1,65 @@
-import "./RegistrarUsuarios.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function RegistrarUsuarios() {
+function RegistrarUsuarios({ usuarioEditado, usuarioNuevo }) {
 
-  const [usuario, setUsuario] = useState({
-    nombre: "",
-    apellidos: "",
-    direccion: "",
-    telefono: "",
-    correo: "",
-    username: ""
-  });
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleChange = (e) => {
-    setUsuario({
-      ...usuario,
-      [e.target.name]: e.target.value
-    });
-  };
+  useEffect(() => {
+    if (usuarioEditado) {
+      setUsername(usuarioEditado.username);
+      setEmail(usuarioEditado.email);
+      setPassword(usuarioEditado.password);
+    }
+  }, [usuarioEditado]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(usuario);
+
+    const nuevoUsuario = {
+      username,
+      email,
+      password
+    };
+
+    usuarioNuevo(nuevoUsuario); // 🔥 aquí usamos la PROP
+
+    setUsername('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
-    <div className="registro-usuarios">
-      <h2>Registrar Usuario</h2>
+    <div className="containerForm">
+      <h2>{usuarioEditado ? "Editar Usuario" : "Registrar Usuario"}</h2>
 
       <form onSubmit={handleSubmit}>
 
         <input
           type="text"
-          name="nombre"
-          placeholder="Nombre"
-          value={usuario.nombre}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="apellidos"
-          placeholder="Apellidos"
-          value={usuario.apellidos}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="direccion"
-          placeholder="Dirección"
-          value={usuario.direccion}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="tel"
-          name="telefono"
-          placeholder="Teléfono"
-          value={usuario.telefono}
-          onChange={handleChange}
-          required
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
 
         <input
           type="email"
-          name="correo"
-          placeholder="Correo"
-          value={usuario.correo}
-          onChange={handleChange}
-          required
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={usuario.username}
-          onChange={handleChange}
-          required
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit">Registrar Usuario</button>
+        <button type="submit">
+          {usuarioEditado ? "Actualizar" : "Registrar"}
+        </button>
 
       </form>
     </div>
