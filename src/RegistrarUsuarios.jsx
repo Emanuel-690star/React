@@ -20,7 +20,8 @@ function RegistrarUsuarios({ usuarioEditado, usuarioNuevo }) {
     const nuevoUsuario = {
       username,
       email,
-      password
+      password,
+      name: { firstname: username, lastname: '' },
     };
 
     usuarioNuevo(nuevoUsuario); // 🔥 aquí usamos la PROP

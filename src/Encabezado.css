@@ -60,6 +60,12 @@ h1{
     height: auto;
     display: block;
 }
+.UsuarioLogueado {
+    color: white;
+    font-size: 16px;
+    margin-left: 20px;
+    font-weight: 600;
+}
 /* Quitamos estilo nativo del botón */
 .MenuDiv button {
     background: none;

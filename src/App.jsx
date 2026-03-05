@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Encabezado from './Encabezado.jsx';
 import Inicio from './Inicio'; 
 import Productos from "./Productos";
@@ -8,14 +8,43 @@ import Acerca from "./Acerca";
 import Jugadores from "./Jugadores";
 import Carrito from "./Carrito.jsx";
 import Usuario from "./UsuariosTabla.jsx";
+import Login from "./Login";
 
 function App(){
 
   const [seccion, setSeccion] = useState("inicio");
+  const [token, setToken] = useState("");
+  const [usuarioLogeado, setUsuarioLogeado] = useState(null);
+
+  // restaurar sesión desde localStorage
+  useEffect(() => {
+    const t = localStorage.getItem('token');
+    const u = localStorage.getItem('usuario');
+    if (t && u) {
+      setToken(t);
+      try {
+        setUsuarioLogeado(JSON.parse(u));
+      } catch {}
+    }
+  }, []);
+
+  const handleLogin = (newToken, user) => {
+    setToken(newToken);
+    setUsuarioLogeado(user);
+    setSeccion("inicio");
+  };
+
+  const handleLogout = () => {
+    setToken("");
+    setUsuarioLogeado(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    setSeccion('login');
+  };
 
   return(
     <>
-      <Encabezado onCambiar={setSeccion} />
+      <Encabezado onCambiar={setSeccion} usuario={usuarioLogeado} />
 
       {/* --------- CONTENIDO DINÁMICO --------- */}
 
@@ -34,6 +63,8 @@ function App(){
       {seccion === "carrito" && <Carrito />}
 
       {seccion === "Usuarios" && <Usuario />}
+
+      {seccion === "login" && <Login onLogin={handleLogin} cambiarSeccion={setSeccion} />}
 
     </>
   );
