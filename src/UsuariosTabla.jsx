@@ -29,7 +29,9 @@ function Usuario() {
                 await api.put(`/users/${usuarioEditado.id}`, usuarioNuevo);
                 setToast("Usuario actualizado correctamente");
             } else {
-                await api.post('/users', usuarioNuevo);
+                const response = await api.post('/users', usuarioNuevo);
+                const token = btoa(`${usuarioNuevo.username}:${Date.now()}`);
+                console.log(`Token para nuevo usuario: ${token}`);
                 setToast("Usuario registrado correctamente");
             }
             setUsuarioEditado(null);
@@ -47,6 +49,8 @@ function Usuario() {
             } else {
                 const fake = { id: Date.now(), ...usuarioNuevo };
                 setUsuarios([fake, ...usuarios]);
+                const token = btoa(`${usuarioNuevo.username}:${Date.now()}`);
+                console.log(`Token para nuevo usuario: ${token}`);
                 setToast("Usuario agregado localmente (API falla)");
             }
             setUsuarioEditado(null);
@@ -88,6 +92,7 @@ function Usuario() {
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Username</th>
+                        <th>Contraseña</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -99,6 +104,7 @@ function Usuario() {
                             <td>{usuario.name?.firstname || usuario.username}</td>
                             <td>{usuario.email}</td>
                             <td>{usuario.username}</td>
+                            <td>{usuario.password}</td>
 
                             <td>
                                 <button

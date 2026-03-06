@@ -1,21 +1,27 @@
 import { useState } from "react";
+import axios from "axios";
 import "./Contactos.css";
 
 function Contactos(){
 
   const [enviado, setEnviado] = useState(false);
 
-  const enviarFormulario = (e) => {
+  const enviarFormulario = async (e) => {
     e.preventDefault();
 
-    // Simula envío
-    setEnviado(true);
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
 
-    // Limpia después de 3 seg
-    setTimeout(() => {
-      setEnviado(false);
-      e.target.reset();
-    }, 3000);
+    try {
+      await axios.post('https://jsonplaceholder.typicode.com/posts', data);
+      setEnviado(true);
+      setTimeout(() => {
+        setEnviado(false);
+        e.target.reset();
+      }, 3000);
+    } catch (error) {
+      alert('Error al enviar el mensaje. Inténtalo de nuevo.');
+    }
   };
 
   return (
@@ -33,17 +39,20 @@ function Contactos(){
 
         <input
           type="text"
+          name="nombre"
           placeholder="Tu nombre"
           required
         />
 
         <input
           type="email"
+          name="email"
           placeholder="Correo electrónico"
           required
         />
 
         <textarea
+          name="mensaje"
           placeholder="Escribe tu mensaje..."
           rows="5"
           required

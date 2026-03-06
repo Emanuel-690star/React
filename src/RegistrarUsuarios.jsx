@@ -52,7 +52,7 @@ function RegistrarUsuarios({ usuarioEditado, usuarioNuevo }) {
         />
 
         <input
-          type="password"
+          type="text"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
