@@ -10,58 +10,27 @@ function Login({ onLogin, cambiarSeccion }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Only allow the specific user requested by the project owner
+    if (usuario === "Ema" && contrasena === "123654") {
+      const token = `ema-token-${Date.now()}`;
+      const userObj = { username: "Ema" };
 
-    try {
-      // obtener usuarios desde la API
-      const response = await api.get("/users");
-      const lista = response.data;
+      // persist session
+      localStorage.setItem("token", token);
+      localStorage.setItem("usuario", JSON.stringify(userObj));
 
-      const encontrado = lista.find(
-        (u) => u.username === usuario && u.password === contrasena
-      );
+      setToast("Login exitoso");
+      if (onLogin) onLogin(token, userObj);
 
-      if (encontrado) {
-
-        // consumir la API de login (del .env)
-        const loginResponse = await fetch(import.meta.env.VITE_FAKESTORE_API_KEY, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            username: usuario,
-            password: contrasena
-          })
-        });
-
-        const data = await loginResponse.json();
-
-        const token = data.token;
-
-        // mostrar token en consola
-        console.log("TOKEN:", token);
-
-        setToast("Login exitoso");
-
-        // guardar token
-        localStorage.setItem("token", token);
-        localStorage.setItem("usuario", JSON.stringify(encontrado));
-
-        if (onLogin) onLogin(token, encontrado);
-
-        setUsuario("");
-        setContrasena("");
-
-      } else {
-        setToast("Usuario o contraseña incorrectos");
-      }
-
-    } catch (error) {
-      console.error("Error durante login", error);
-      setToast("Error de conexión, inténtalo luego");
+      setUsuario("");
+      setContrasena("");
+      setTimeout(() => setToast(""), 1500);
+      return;
     }
 
-    setTimeout(() => setToast(""), 4000);
+    // otherwise reject
+    setToast("Usuario o contraseña incorrectos");
+    setTimeout(() => setToast(""), 3000);
   };
 
   return (

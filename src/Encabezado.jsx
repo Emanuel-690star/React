@@ -6,11 +6,11 @@ import tiktok from './assets/tik-tok.png';
 import './Encabezado.css';
 import Clima from './Clima';
 
-function Encabezado({ onCambiar, usuario }){
+function Encabezado({ onCambiar, usuario, onLogout }){
     return (
         <div className="Encabezado">
             <Logo />
-            <Menu onCambiar={onCambiar} />
+            <Menu onCambiar={onCambiar} usuario={usuario} onLogout={onLogout} />
             {usuario && <div className="UsuarioLogueado">Hola, {usuario.username}</div>}
             <Redes />
         </div>
@@ -25,7 +25,7 @@ function Logo(){
     );
 }
 
-function Menu({ onCambiar }){
+function Menu({ onCambiar, usuario, onLogout }){
     return (
         <div className="MenuDiv">
             <ul>
@@ -35,9 +35,10 @@ function Menu({ onCambiar }){
                 <li><button onClick={() => onCambiar("contacto")}>Contacto</button></li>
                 <li><button onClick={() => onCambiar("sucursales")}>Sucursales</button></li>
                 <li><button onClick={() => onCambiar("Jugadores")}>Jugadores</button></li>
-                <li><button onClick={() => onCambiar("carrito")}>Carrito</button></li>
-                <li><button onClick={() => onCambiar("Usuarios")}>Usuarios</button></li>
-                <li><button onClick={() => onCambiar("login")}>Login</button></li>
+                {usuario && <li><button onClick={() => onCambiar("carrito")}>Carrito</button></li>}
+                {usuario && <li><button onClick={() => onCambiar("Usuarios")}>Usuarios</button></li>}
+                {!usuario && <li><button onClick={() => onCambiar("login")}>Login</button></li>}
+                {usuario && <li><button onClick={() => { if (onLogout) onLogout(); }}>Cerrar sesión</button></li>}
             </ul>
             <Clima />
         </div>    

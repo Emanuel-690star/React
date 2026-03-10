@@ -44,7 +44,7 @@ function App(){
 
   return(
     <>
-      <Encabezado onCambiar={setSeccion} usuario={usuarioLogeado} />
+      <Encabezado onCambiar={setSeccion} usuario={usuarioLogeado} onLogout={handleLogout} />
 
       {/* --------- CONTENIDO DINÁMICO --------- */}
 
