@@ -35,6 +35,7 @@ function Menu({ onCambiar, usuario, onLogout }){
                 <li><button onClick={() => onCambiar("contacto")}>Contacto</button></li>
                 <li><button onClick={() => onCambiar("sucursales")}>Sucursales</button></li>
                 <li><button onClick={() => onCambiar("Jugadores")}>Jugadores</button></li>
+                {usuario && <li><button onClick={() => onCambiar("categorias")}>Categorías</button></li>}
                 {usuario && <li><button onClick={() => onCambiar("carrito")}>Carrito</button></li>}
                 {usuario && <li><button onClick={() => onCambiar("Usuarios")}>Usuarios</button></li>}
                 {!usuario && <li><button onClick={() => onCambiar("login")}>Login</button></li>}

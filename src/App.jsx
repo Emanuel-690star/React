@@ -8,6 +8,7 @@ import Acerca from "./Acerca";
 import Jugadores from "./Jugadores";
 import Carrito from "./Carrito.jsx";
 import Usuario from "./UsuariosTabla.jsx";
+import Categorias from "./Categorias.jsx";
 import Login from "./Login";
 
 function App(){
@@ -52,7 +53,7 @@ function App(){
 
       {seccion === "acerca" && <Acerca />}
 
-      {seccion === "productos" && <Productos />}
+      {seccion === "productos" && <Productos usuario={usuarioLogeado} />}
 
       {seccion === "contacto" && <Contactos />}
 
@@ -63,6 +64,8 @@ function App(){
       {seccion === "carrito" && <Carrito />}
 
       {seccion === "Usuarios" && <Usuario />}
+
+      {seccion === "categorias" && <Categorias />}
 
       {seccion === "login" && <Login onLogin={handleLogin} cambiarSeccion={setSeccion} />}
 

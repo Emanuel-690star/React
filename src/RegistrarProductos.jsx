@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function RegistrarProductos({ productoEditar, guardarCambios }) {
+function RegistrarProductos({ usuario, productoEditar, guardarCambios }) {
 
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
@@ -36,57 +36,59 @@ function RegistrarProductos({ productoEditar, guardarCambios }) {
   };
 
   return (
+    <>
+      {usuario && (
+        <div className="registro-container">
 
-    <div className="registro-container">
+          <h2 className="titulo-registro">Registro de Productos</h2>
 
-      <h2 className="titulo-registro">Registro de Productos</h2>
+          <form className="tabla-formulario" onSubmit={guardarProducto}>
 
-      <form className="tabla-formulario" onSubmit={guardarProducto}>
+            <div className="fila">
+              <label>Nombre del producto</label>
+              <input
+                type="text"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+              />
+            </div>
 
-        <div className="fila">
-          <label>Nombre del producto</label>
-          <input
-            type="text"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-          />
+            <div className="fila">
+              <label>Precio</label>
+              <input
+                type="number"
+                value={precio}
+                onChange={(e) => setPrecio(e.target.value)}
+              />
+            </div>
+
+            <div className="fila">
+              <label>Descripción</label>
+              <input
+                type="text"
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
+              />
+            </div>
+
+            <div className="fila">
+              <label>Categoría</label>
+              <input
+                type="text"
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+              />
+            </div>
+
+            <button className="btn-guardar">
+              Guardar Producto
+            </button>
+
+          </form>
+
         </div>
-
-        <div className="fila">
-          <label>Precio</label>
-          <input
-            type="number"
-            value={precio}
-            onChange={(e) => setPrecio(e.target.value)}
-          />
-        </div>
-
-        <div className="fila">
-          <label>Descripción</label>
-          <input
-            type="text"
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-          />
-        </div>
-
-        <div className="fila">
-          <label>Categoría</label>
-          <input
-            type="text"
-            value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
-          />
-        </div>
-
-        <button className="btn-guardar">
-          Guardar Producto
-        </button>
-
-      </form>
-
-    </div>
-
+      )}
+    </>
   );
 }
 

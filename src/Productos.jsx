@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import api from "./services/Api";
 import RegistrarProductos from "./RegistrarProductos";
 
-function Productos() {
+function Productos({ usuario }) {
 
   const [productos, setProductos] = useState([]);
   const [productoEditar, setProductoEditar] = useState(null);
@@ -107,6 +107,7 @@ function Productos() {
       {toast && <div className="toast">{toast}</div>}
 
       <RegistrarProductos
+        usuario={usuario}
         productoEditar={productoEditar}
         guardarCambios={guardarCambios}
       />
@@ -130,19 +131,23 @@ function Productos() {
                 Añadir al carrito 🛒
               </button>
 
-              <button
-                className="btn-editar"
-                onClick={() => editarProducto(producto)}
-              >
-                Editar ✏️
-              </button>
+              {usuario && (
+                <>
+                  <button
+                    className="btn-editar"
+                    onClick={() => editarProducto(producto)}
+                  >
+                    Editar ✏️
+                  </button>
 
-              <button
-                className="btn-eliminar"
-                onClick={() => eliminarProducto(producto.id)}
-              >
-                Eliminar 🗑
-              </button>
+                  <button
+                    className="btn-eliminar"
+                    onClick={() => eliminarProducto(producto.id)}
+                  >
+                    Eliminar 🗑
+                  </button>
+                </>
+              )}
 
             </div>
 
