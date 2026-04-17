@@ -1,27 +1,22 @@
 import { useState } from "react";
-import axios from "axios";
 import "./Contactos.css";
 
 function Contactos(){
 
   const [enviado, setEnviado] = useState(false);
 
-  const enviarFormulario = async (e) => {
+  const enviarFormulario = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
+    localStorage.setItem(`contacto-${Date.now()}`, JSON.stringify(data));
 
-    try {
-      await axios.post('https://jsonplaceholder.typicode.com/posts', data);
-      setEnviado(true);
-      setTimeout(() => {
-        setEnviado(false);
-        e.target.reset();
-      }, 3000);
-    } catch (error) {
-      alert('Error al enviar el mensaje. Inténtalo de nuevo.');
-    }
+    setEnviado(true);
+    setTimeout(() => {
+      setEnviado(false);
+      e.target.reset();
+    }, 3000);
   };
 
   return (

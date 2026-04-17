@@ -4,33 +4,34 @@ function RegistrarProductos({ usuario, productoEditar, guardarCambios }) {
 
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [stock, setStock] = useState("");
+  const [imagen, setImagen] = useState("");
+  const [idCategoria, setIdCategoria] = useState("");
 
   useEffect(() => {
-
     if (productoEditar) {
-      setNombre(productoEditar.title || "");
-      setPrecio(productoEditar.price || "");
-      setDescripcion(productoEditar.description || "");
-      setCategoria(productoEditar.category || "");
+      setNombre(productoEditar.nombre || "");
+      setPrecio(productoEditar.precio || "");
+      setDireccion(productoEditar.direccion || "");
+      setStock(productoEditar.stock || "");
+      setImagen(productoEditar.imagen || "");
+      setIdCategoria(productoEditar.id_categoria || "");
     }
-
   }, [productoEditar]);
 
   const guardarProducto = (e) => {
-
     e.preventDefault();
 
     const productoActualizado = {
       ...productoEditar,
-      title: nombre,
-      price: precio,
-      description: descripcion,
-      category: categoria
+      nombre,
+      precio,
+      direccion,
+      stock,
+      imagen,
+      id_categoria: idCategoria,
     };
-
-    console.log("Producto actualizado:", productoActualizado);
 
     guardarCambios(productoActualizado);
   };
@@ -63,32 +64,50 @@ function RegistrarProductos({ usuario, productoEditar, guardarCambios }) {
             </div>
 
             <div className="fila">
-              <label>Descripción</label>
-              <input
-                type="text"
-                value={descripcion}
-                onChange={(e) => setDescripcion(e.target.value)}
-              />
-            </div>
-
-            <div className="fila">
-              <label>Categoría</label>
-              <input
-                type="text"
-                value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
-              />
-            </div>
-
-            <button className="btn-guardar">
-              Guardar Producto
-            </button>
-
-          </form>
-
+          <label>Dirección / Descripción</label>
+          <input
+            type="text"
+            value={direccion}
+            onChange={(e) => setDireccion(e.target.value)}
+          />
         </div>
-      )}
-    </>
+
+        <div className="fila">
+          <label>Stock</label>
+          <input
+            type="number"
+            value={stock}
+            onChange={(e) => setStock(e.target.value)}
+          />
+        </div>
+
+        <div className="fila">
+          <label>Imagen URL</label>
+          <input
+            type="text"
+            value={imagen}
+            onChange={(e) => setImagen(e.target.value)}
+          />
+        </div>
+
+        <div className="fila">
+          <label>ID Categoría</label>
+          <input
+            type="number"
+            value={idCategoria}
+            onChange={(e) => setIdCategoria(e.target.value)}
+          />
+        </div>
+
+        <button className="btn-guardar" type="submit">
+          {productoEditar ? "Actualizar" : "Guardar Producto"}
+        </button>
+
+      </form>
+
+    </div>
+  )}
+</>
   );
 }
 

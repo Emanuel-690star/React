@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 
 function RegistrarUsuarios({ usuarioEditado, usuarioNuevo }) {
 
-  const [username, setUsername] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [telefono, setTelefono] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
     if (usuarioEditado) {
-      setUsername(usuarioEditado.username);
-      setEmail(usuarioEditado.email);
-      setPassword(usuarioEditado.password);
+      setNombre(usuarioEditado.nombre || '');
+      setDireccion(usuarioEditado.direccion || '');
+      setTelefono(usuarioEditado.telefono || '');
+      setEmail(usuarioEditado.email || '');
+      setPassword(usuarioEditado.password || '');
     }
   }, [usuarioEditado]);
 
@@ -18,15 +22,18 @@ function RegistrarUsuarios({ usuarioEditado, usuarioNuevo }) {
     e.preventDefault();
 
     const nuevoUsuario = {
-      username,
+      nombre,
+      direccion,
+      telefono,
       email,
       password,
-      name: { firstname: username, lastname: '' },
     };
 
-    usuarioNuevo(nuevoUsuario); // 🔥 aquí usamos la PROP
+    usuarioNuevo(nuevoUsuario);
 
-    setUsername('');
+    setNombre('');
+    setDireccion('');
+    setTelefono('');
     setEmail('');
     setPassword('');
   };
@@ -39,9 +46,23 @@ function RegistrarUsuarios({ usuarioEditado, usuarioNuevo }) {
 
         <input
           type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Nombre"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Dirección"
+          value={direccion}
+          onChange={(e) => setDireccion(e.target.value)}
+        />
+
+        <input
+          type="text"
+          placeholder="Teléfono"
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
         />
 
         <input
@@ -52,7 +73,7 @@ function RegistrarUsuarios({ usuarioEditado, usuarioNuevo }) {
         />
 
         <input
-          type="text"
+          type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

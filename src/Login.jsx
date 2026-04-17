@@ -7,67 +7,92 @@ function Login({ onLogin, cambiarSeccion }) {
   const [mostrarRegistro, setMostrarRegistro] = useState(false);
   
   // Login state
-  const [usuario, setUsuario] = useState("");
-  const [contrasena, setContrasena] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   
   // Registro state
-  const [usuarioReg, setUsuarioReg] = useState("");
+  const [nombreReg, setNombreReg] = useState("");
+  const [direccionReg, setDireccionReg] = useState("");
+  const [telefonoReg, setTelefonoReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
-  const [contrasenaReg, setContrasenaReg] = useState("");
-  const [contrasenaConfirm, setContrasenaConfirm] = useState("");
+  const [passwordReg, setPasswordReg] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   
   const [toast, setToast] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Only allow the specific user requested by the project owner
-    if (usuario === "Ema" && contrasena === "123654") {
-      const token = `ema-token-${Date.now()}`;
-      const userObj = { username: "Ema" };
 
-      // persist session
+    try {
+      const response = await api.post("/login", {
+        email,
+        password,
+      });
+
+      const token = response.data.token;
+      const userObj = response.data.user || { email };
+
       localStorage.setItem("token", token);
       localStorage.setItem("usuario", JSON.stringify(userObj));
 
       setToast("Login exitoso");
       if (onLogin) onLogin(token, userObj);
 
-      setUsuario("");
-      setContrasena("");
+      setEmail("");
+      setPassword("");
       setTimeout(() => setToast(""), 1500);
-      return;
+    } catch (error) {
+      const message =
+        error.response?.data?.message || error.message || "Error en el login";
+      setToast(message);
+      setTimeout(() => setToast(""), 3000);
     }
-
-    // otherwise reject
-    setToast("Usuario o contraseña incorrectos");
-    setTimeout(() => setToast(""), 3000);
   };
 
-  const handleRegistro = (e) => {
+  const handleRegistro = async (e) => {
     e.preventDefault();
 
-    if (contrasenaReg !== contrasenaConfirm) {
+    if (passwordReg !== passwordConfirm) {
       setToast("Las contraseñas no coinciden");
       setTimeout(() => setToast(""), 3000);
       return;
     }
 
-    if (!usuarioReg || !emailReg || !contrasenaReg) {
+    if (!nombreReg || !direccionReg || !telefonoReg || !emailReg || !passwordReg) {
       setToast("Completa todos los campos");
       setTimeout(() => setToast(""), 3000);
       return;
     }
 
-    setToast("Cuenta creada exitosamente");
-    setUsuarioReg("");
-    setEmailReg("");
-    setContrasenaReg("");
-    setContrasenaConfirm("");
-    
-    setTimeout(() => {
-      setMostrarRegistro(false);
-      setToast("");
-    }, 1500);
+    try {
+      await api.post("/usuarios", {
+        nombre: nombreReg,
+        direccion: direccionReg,
+        telefono: telefonoReg,
+        email: emailReg,
+        password: passwordReg,
+        rol: "cliente",
+        fecha_registro: new Date(),
+      });
+
+      setToast("Cuenta creada exitosamente");
+      setNombreReg("");
+      setDireccionReg("");
+      setTelefonoReg("");
+      setEmailReg("");
+      setPasswordReg("");
+      setPasswordConfirm("");
+
+      setTimeout(() => {
+        setMostrarRegistro(false);
+        setToast("");
+      }, 1500);
+    } catch (error) {
+      const message =
+        error.response?.data?.message || error.message || "Error al registrar usuario";
+      setToast(message);
+      setTimeout(() => setToast(""), 3000);
+    }
   };
 
   return (
@@ -84,24 +109,24 @@ function Login({ onLogin, cambiarSeccion }) {
           // FORMULARIO DE LOGIN
           <form onSubmit={handleSubmit}>
             <div className="input-group">
-              <label htmlFor="usuario">Usuario</label>
+              <label htmlFor="email">Email</label>
               <input
-                type="text"
-                id="usuario"
-                placeholder="Ingresa tu usuario"
-                value={usuario}
-                onChange={(e) => setUsuario(e.target.value)}
+                type="email"
+                id="email"
+                placeholder="Ingresa tu email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
             <div className="input-group">
-              <label htmlFor="contrasena">Contraseña</label>
+              <label htmlFor="password">Password</label>
               <input
                 type="password"
-                id="contrasena"
-                placeholder="Ingresa tu contraseña"
-                value={contrasena}
-                onChange={(e) => setContrasena(e.target.value)}
+                id="password"
+                placeholder="Ingresa tu password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
@@ -131,13 +156,35 @@ function Login({ onLogin, cambiarSeccion }) {
           // FORMULARIO DE REGISTRO
           <form onSubmit={handleRegistro}>
             <div className="input-group">
-              <label htmlFor="usuarioReg">Usuario</label>
+              <label htmlFor="nombreReg">Nombre</label>
               <input
                 type="text"
-                id="usuarioReg"
-                placeholder="Ingresa tu usuario"
-                value={usuarioReg}
-                onChange={(e) => setUsuarioReg(e.target.value)}
+                id="nombreReg"
+                placeholder="Ingresa tu nombre"
+                value={nombreReg}
+                onChange={(e) => setNombreReg(e.target.value)}
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="direccionReg">Dirección</label>
+              <input
+                type="text"
+                id="direccionReg"
+                placeholder="Ingresa tu dirección"
+                value={direccionReg}
+                onChange={(e) => setDireccionReg(e.target.value)}
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="telefonoReg">Teléfono</label>
+              <input
+                type="text"
+                id="telefonoReg"
+                placeholder="Ingresa tu teléfono"
+                value={telefonoReg}
+                onChange={(e) => setTelefonoReg(e.target.value)}
               />
             </div>
 
@@ -153,24 +200,24 @@ function Login({ onLogin, cambiarSeccion }) {
             </div>
 
             <div className="input-group">
-              <label htmlFor="contrasenaReg">Contraseña</label>
+              <label htmlFor="passwordReg">Password</label>
               <input
                 type="password"
-                id="contrasenaReg"
-                placeholder="Ingresa tu contraseña"
-                value={contrasenaReg}
-                onChange={(e) => setContrasenaReg(e.target.value)}
+                id="passwordReg"
+                placeholder="Ingresa tu password"
+                value={passwordReg}
+                onChange={(e) => setPasswordReg(e.target.value)}
               />
             </div>
 
             <div className="input-group">
-              <label htmlFor="contrasenaConfirm">Confirmar Contraseña</label>
+              <label htmlFor="passwordConfirm">Confirmar Password</label>
               <input
                 type="password"
-                id="contrasenaConfirm"
-                placeholder="Confirma tu contraseña"
-                value={contrasenaConfirm}
-                onChange={(e) => setContrasenaConfirm(e.target.value)}
+                id="passwordConfirm"
+                placeholder="Confirma tu password"
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
               />
             </div>
 

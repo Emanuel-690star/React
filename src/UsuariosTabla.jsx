@@ -15,7 +15,7 @@ function Usuario() {
 
     const obtenerUsuarios = async () => {
         try {
-            const response = await api.get('/users');
+            const response = await api.get('/usuarios');
             setUsuarios(response.data);
         } catch (error) {
             console.error("Error al obtener usuarios", error);
@@ -26,12 +26,10 @@ function Usuario() {
     const manejarUsuarioNuevo = async (usuarioNuevo) => {
         try {
             if (usuarioEditado) {
-                await api.put(`/users/${usuarioEditado.id}`, usuarioNuevo);
+                await api.put(`/usuarios/${usuarioEditado.id}`, usuarioNuevo);
                 setToast("Usuario actualizado correctamente");
             } else {
-                const response = await api.post('/users', usuarioNuevo);
-                const token = btoa(`${usuarioNuevo.username}:${Date.now()}`);
-                console.log(`Token para nuevo usuario: ${token}`);
+                await api.post('/usuarios', usuarioNuevo);
                 setToast("Usuario registrado correctamente");
             }
             setUsuarioEditado(null);
@@ -49,8 +47,6 @@ function Usuario() {
             } else {
                 const fake = { id: Date.now(), ...usuarioNuevo };
                 setUsuarios([fake, ...usuarios]);
-                const token = btoa(`${usuarioNuevo.username}:${Date.now()}`);
-                console.log(`Token para nuevo usuario: ${token}`);
                 setToast("Usuario agregado localmente (API falla)");
             }
             setUsuarioEditado(null);
@@ -61,7 +57,7 @@ function Usuario() {
 
     const eliminarUsuario = async (id) => {
         try {
-            await api.delete(`/users/${id}`);
+            await api.delete(`/usuarios/${id}`);
             setToast("Usuario eliminado correctamente");
             obtenerUsuarios();
         } catch (error) {
@@ -90,9 +86,12 @@ function Usuario() {
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Username</th>
-                        <th>Contraseña</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Rol</th>
+                        <th>Fecha registro</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -101,10 +100,13 @@ function Usuario() {
                 <tbody>
                     {usuarios.map((usuario) => (
                         <tr key={usuario.id}>
-                            <td>{usuario.name?.firstname || usuario.username}</td>
+                            <td>{usuario.nombre}</td>
+                            <td>{usuario.direccion}</td>
+                            <td>{usuario.telefono}</td>
                             <td>{usuario.email}</td>
-                            <td>{usuario.username}</td>
                             <td>{usuario.password}</td>
+                            <td>{usuario.rol}</td>
+                            <td>{new Date(usuario.fecha_registro).toLocaleDateString()}</td>
 
                             <td>
                                 <button

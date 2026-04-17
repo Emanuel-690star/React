@@ -11,7 +11,7 @@ function Encabezado({ onCambiar, usuario, onLogout }){
         <div className="Encabezado">
             <Logo />
             <Menu onCambiar={onCambiar} usuario={usuario} onLogout={onLogout} />
-            {usuario && <div className="UsuarioLogueado">Hola, {usuario.username}</div>}
+            {usuario && <div className="UsuarioLogueado">Hola, {usuario.nombre || usuario.email || usuario.username}</div>}
             <Redes />
         </div>
     );
