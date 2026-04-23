@@ -33,7 +33,7 @@ function Login({ onLogin, cambiarSeccion }) {
       const userObj = response.data.user || { email };
 
       localStorage.setItem("token", token);
-      localStorage.setItem("usuario", JSON.stringify(userObj));
+      localStorage.setItem("user", JSON.stringify(userObj));
 
       setToast("Login exitoso");
       if (onLogin) onLogin(token, userObj);

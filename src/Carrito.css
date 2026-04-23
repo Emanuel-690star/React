@@ -1,85 +1,78 @@
-.carrito-container{
+.carritos {
   padding: 40px;
-  background: #000;
   min-height: 100vh;
-  color: rgb(138, 135, 135);
+  background: #0f0f0f;
+  color: #f1f1f1;
 }
 
-.carrito-title{
-  font-size: 32px;
-  margin-bottom: 30px;
-  color: #00ff6a;
+.carrito-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #1d1d1d, #2a2a2a);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
-/* GRID */
-.carrito-cards{
+.carrito-id,
+.carrito-fecha {
+  margin-bottom: 10px;
+  color: #d7d7d7;
+}
+
+.detalle-lista {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
+  gap: 16px;
+  margin-top: 20px;
 }
 
-/* CARD */
-.carrito-card{
-  background: linear-gradient(145deg, #cdcdcd, #5b5a5a);
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid rgba(92, 94, 93, 0.15);
-  box-shadow: 0 8px 20px rgba(136, 136, 136, 0.6);
-  transition: 0.3s ease;
+.detalle-item {
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.carrito-card:hover{
-  transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(109, 113, 111, 0.15);
+.detalle-item p {
+  margin: 6px 0;
 }
 
-/* HEADER */
-.card-header{
+.detalle-acciones {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  font-weight: bold;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
 }
 
-.pedido-id{
-  color: #00ff6a;
-}
-
-.pedido-fecha{
-  color: #656565;
-  font-size: 13px;
-}
-
-/* BODY */
-.card-body h4{
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: #6f6d6d;
-}
-
-.card-body ul{
-  padding-left: 18px;
-  font-size: 14px;
-  color: #ddd;
-}
-
-.card-body li{
-  margin-bottom: 6px;
-}
-
-/* BOTÓN */
-.carrito-btn{
-  margin-top: 15px;
-  width: 100%;
-  padding: 10px;
+.detalle-acciones button {
   border: none;
-  border-radius: 8px;
-  background: #00ff6a;
-  font-weight: bold;
+  border-radius: 10px;
+  padding: 8px 14px;
   cursor: pointer;
-  transition: 0.2s ease;
+  background: #f3c623;
+  color: #111;
+  font-weight: 700;
 }
 
-.carrito-btn:hover{
-  background: #00cc55;
+.detalle-acciones span {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.btn-eliminar-detalle {
+  background: #ff6b6b !important;
+  color: #fff !important;
+}
+
+.comprar {
+  margin-top: 24px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #5a5a5a;
+  color: #fff;
+  cursor: not-allowed;
 }

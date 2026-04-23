@@ -37,7 +37,7 @@ function Menu({ onCambiar, usuario, onLogout }){
                 <li><button onClick={() => onCambiar("Jugadores")}>Jugadores</button></li>
                 {usuario && <li><button onClick={() => onCambiar("categorias")}>Categorías</button></li>}
                 {usuario && <li><button onClick={() => onCambiar("carrito")}>Carrito</button></li>}
-                {usuario && <li><button onClick={() => onCambiar("Usuarios")}>Usuarios</button></li>}
+                {usuario && usuario.rol === 'admin' && <li><button onClick={() => onCambiar("Usuarios")}>Usuarios</button></li>}
                 {!usuario && <li><button onClick={() => onCambiar("login")}>Login</button></li>}
                 {usuario && <li><button onClick={() => { if (onLogout) onLogout(); }}>Cerrar sesión</button></li>}
             </ul>
